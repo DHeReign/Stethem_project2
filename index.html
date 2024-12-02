@@ -23,10 +23,9 @@
 
     <script>
         let quote = document.getElementById("quote")
-        let randomImg = getRandomElement(images);
         let image = document.getElementById("image");
 
-        let beg = [
+        let beginning = [
             "Кто рано встает, ",
             "Не бойся ошибаться, ",
             "Когда меня рожали, ",
@@ -35,7 +34,7 @@
             "Хмели сумели, "
         ];
 
-        let end = [
+        let ending = [
             "тот потом пожалеет о своем решении",
             "собственно, тогда я и родился",
             "но не каждый может кинуть волка в камень",
@@ -53,11 +52,19 @@
 
 
         function generateQuote() {
-            function rand(array) {
-                return Math.floor(Math.random() * array.length);
-            }
+
+            let randomBeginning = getRandomElement(beginning);
+            let randomEnding = getRandomElement(ending);
+            let randomImg = getRandomElement(Images);
+
+            let randomQuote = randomBeginning + randomEnding;
 
             hide()
+            
+            function getRandomElement(array) {
+                let index = Math.floor(Math.random() * array.length);
+                return(array[index])
+            }
             
             // Скрывает текущие цитату и изображение
             function hide() {
@@ -79,7 +86,7 @@
                 }
 
                 image.src = 'images/' + randomImg;
-                quote.textContent = beg[rand(beg)] + end[rand(end)];
+                quote.textContent = randomQuote;
 
                 image.classList.add('show');
                 quote.classList.add('show');
